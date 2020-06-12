@@ -1,6 +1,8 @@
 package ElOskar101.kingkuna;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import ElOskar101.kingkuna.Activities.Create;
 import ElOskar101.kingkuna.Activities.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(!IsLogged()){
+            this.finish();
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+        }
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -33,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                Intent i = new Intent(getApplicationContext(), Create.class);
                 startActivity(i);
             }
         });
@@ -48,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    private boolean IsLogged(){
+        SharedPreferences sharedpreferences = getSharedPreferences("preferences", Context.MODE_PRIVATE);
+        System.out.println(sharedpreferences.getString("token", ""));
+        return !sharedpreferences.getString("token", "").isEmpty();
     }
 
     @Override

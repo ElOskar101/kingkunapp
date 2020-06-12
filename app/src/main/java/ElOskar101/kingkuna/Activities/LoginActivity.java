@@ -2,23 +2,17 @@ package ElOskar101.kingkuna.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.util.Objects;
-
 import ElOskar101.kingkuna.Api.Connection;
-import ElOskar101.kingkuna.Models.Login;
 import ElOskar101.kingkuna.Models.User;
 import ElOskar101.kingkuna.R;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText username;
     Button singIn;
     User user;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         }else {
             user.setUsername(username.getText().toString());
             user.setPdw(password.getText().toString());
-
-            System.out.println("THE USERNAME "+user.getUsername());
-            System.out.println("THE PASSWORD "+user.getPdw());
         }
 
         return isOK;
@@ -73,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                     getToken();
                 else
                     Toast.makeText(getApplicationContext(), "Debe rellenar todos los campos", Toast.LENGTH_LONG).show();
-
             }
         });
     }
@@ -84,10 +75,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.body()!= null){
-                    Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_LONG).show();
-                    System.out.println("Token: "+response.body().getToken());
+                    token = response.body().getToken();
+                    SaveToken();
                 }else {
-                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
                     System.out.println("MESSAGE: "+response.message());
                 }
             }
@@ -98,6 +88,12 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println("ERROR: "+t.getMessage());
             }
         });
+    }
 
+    private void SaveToken(){
+        SharedPreferences sharedpreferences = getSharedPreferences("preferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString("token", token);
+        editor.apply();
     }
 }

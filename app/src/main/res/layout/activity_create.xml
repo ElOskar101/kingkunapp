@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.Create"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+
+                android:id="@+id/create_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/transparent_border_radius"
+                android:hint="Nombre del contacto"
+                android:inputType="textAutoComplete"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_margin="5dp" />
+
+
+            <EditText
+                android:id="@+id/create_phone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/transparent_border_radius"
+                android:hint="Número telefónico"
+                android:inputType="phone"
+                android:layout_margin="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/transparent_border_radius"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_margin="5dp">
+
+
+                <TextView
+                    android:id="@+id/demo_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="1"
+                    android:textSize="70sp" />
+
+                    <TextView
+                        android:id="@+id/text_days"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Día de prueba"
+                        android:layout_gravity="center"
+                        android:textSize="30sp" />
+
+                <SeekBar
+                    android:id="@+id/seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="7"
+                    android:min="1"
+                    android:layout_marginBottom="5dp">
+
+                </SeekBar>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/create_client"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:elevation="5dp"
+            android:focusable="true"
+            android:layout_gravity="center"
+            android:text="Nuevo Cliente"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+
+</ScrollView>
